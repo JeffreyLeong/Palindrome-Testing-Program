@@ -21,7 +21,17 @@ bool is_pal(const string& s);
 
 int main()
 {
-    
+    string str;
+    cout << "Enter a candidate for palindrome test\n"
+         << "followed by pressing Return.\n";
+    getline(cin, str);
+
+    if(is_pal(str))
+        cout << "\"" << str + "\" is a palindrome.";
+    else
+        cout << "\"" << str + "\" is not a palindrome.";
+    cout << endl;
+    return 0 ;
 }
 
 void swap(char& v1, char& v2)
