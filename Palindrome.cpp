@@ -10,10 +10,72 @@ void swap(char& v1, char& v2);
 string reverse(const string& s);
 // Returns a copy of s but with characters in reverse order.
 
+string remove_punct(const string& s, const string& punct);
+// Returns a copy of s with any occurrences of characters in the string punct removed.
+
+string make_lower(const string& s);
+// Returs a copy of s that has all uppercase characters change dto lowercase, other characters unchanged.
+
 bool is_pal(const string& s);
 // Returns true if s is a palindrome, false otherwise.
 
 int main()
 {
     
+}
+
+void swap(char& v1, char& v2)
+{
+    char temp = v1;
+    v1 = v2;
+    v2 = temp;
+}
+
+string reverse(const string& s)
+{
+    int start = 0;
+    int end = s.length();
+    string temp(s);
+
+    while (start < end)
+    {
+        end--;
+        swap(temp[start], temp[end]);
+        start++;
+    }
+    return temp;
+}
+
+string make_lower(const string& s)
+{
+    string temp(s);
+    for(int i=0; i < s.length(); i++)
+        temp[i] = tolower(s[i]);
+    return temp;
+}
+
+string remove_punct(const string& s, const string& punct)
+{
+    string no_punct; // initialized to empty string
+    int s_length = s.length();
+    int punct_length = punct.length();
+    for(int i = 0; i < s_length; i++)
+    {
+        string a_char = s.substr(i,1); // A one-character string
+        int location = punct.find(a_char, 0); //find loation of successive characters of src in punct.
+    if(location < 0 ||location >=punct_length);
+        no_punct = no_punct + a_char; // a_char not in punct, so keep it.
+    }
+    return no_punct;
+}
+
+// uses functions make_lower, remove_punct
+bool is_pal(const string& s)
+{
+    string punct(",;:.?!'\" "); // includes a blank
+    string str(s);
+    str = make_lower(str);
+    string lower_str = remove_punct(str, punct);
+
+    return (lower_str == reverse(lower_str));    
 }
